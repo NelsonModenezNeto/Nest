@@ -5,47 +5,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            gap: 15px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .align-content {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .content-add {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 300px;
+            height: 250px;
+            padding: 15px;
+            background-color: rgb(52, 202, 202);
+            border-radius: 15px;
+
+            label {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            input {
+                border-radius: 10px;
+                font-size: 16px;
+                padding: 2px;
+                padding-left: 10px;
+                border: none;
+                outline: none;
+            }
+
+            button {
+                width: 80%;
+                padding: 7px;
+                border: none;
+                border-radius: 10px;
+                font-weight: 600;
+                background-color: rgb(221, 0, 255);
+                color: white;
+            }
+        }
+
+        .content-filter {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 300px;
+            height: 90px;
+            padding: 15px;
+            background-color: rgb(52, 202, 202);
+            border-radius: 15px;
+
+            form {
+                width: 80%;
+                text-align: center;
+            }
+
+            span {
+                font-size: 14px;
+                font-weight: 600;
+            }
+
+            input {
+                border-radius: 10px;
+                font-size: 16px;
+                padding: 2px;
+                padding-left: 10px;
+                border: none;
+                outline: none;
+            }
+
+            button {
+                width: 80%;
+                padding: 7px;
+                border: none;
+                border-radius: 10px;
+                font-weight: 600;
+                background-color: rgb(221, 0, 255);
+                color: white;
+                margin-top: 15px;
+            }
+        }
+
+        .content-table {
+            width: 630px;
+            padding: 15px;
+            border-radius: 15px;
+            background-color: rgb(251, 251, 251);
+            border: 1px solid rgb(44, 176, 176);
+
+
+            table {
+                border-collapse: collapse;
+                border-spacing: 0;
+                width: 100%;
+
+
+                th {
+                    background-color: rgb(44, 44, 44);
+                    color: white;
+                    padding: 5px;
+                }
+
+                td {
+                    padding: 5px;
+                    text-align: center;
+                }
+
+                tr:nth-child(even) {
+                    background-color: rgb(44, 44, 44);
+                    color: white;
+                }
+
+                thead tr:first-child th:first-child {
+                    border-top-left-radius: 15px;
+               
+                }
+
+                thead tr:first-child th:last-child {
+                    border-top-right-radius: 15px;
+                   
+                }
+
+                tbody tr:last-child td:first-child {
+                    border-bottom-left-radius: 15px;
+                }
+
+                tbody tr:last-child td:last-child {
+                    border-bottom-right-radius: 15px;
+                }
+
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <form action="">
-        <label for="id">Id</label><br>
-        <input id="id" type="text">
+    <div class="container">
+        <div class="align-content">
+            <div class="content-add">
+                <form action="">
+                    <label for="id">ID</label><br>
+                    <input id="id" type="text">
 
+                    <br><br>
+
+                    <label for="name">NOME</label><br>
+                    <input id="name" type="text">
+
+                    <br><br>
+
+                    <label for="ra">RA</label><br>
+                    <input id="ra" type="text">
+
+                    <br><br>
+                </form>
+                <button onclick="cadastrarAluno()">Cadastrar</button>
+            </div>
+
+            <div class="content-filter">
+                <form action="">
+                    <span>FILTRAR POR ID:</span>
+                    <input id="filter-id" type="text">
+                </form>
+                <button onclick="filterAlunoById()">Filtrar</button>
+            </div>
+        </div>
         <br><br>
+        <div class="content-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Ra</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
 
-        <label for="name">Nome</label><br>
-        <input id="name" type="text">
-
-        <br><br>
-
-        <label for="ra">Ra</label><br>
-        <input id="ra" type="text">
-
-        <br><br>
-    </form>
-    <button onclick="cadastrarAluno()">Cadastrar</button>
-
-    <br><br>
-
-    <div>Filtrar por ID:</div>
-    <input id="filter-id" type="text">
-    <button onclick="filterAlunoById()">Filtrar</button>
-
-    <br><br>
-
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Ra</th>
-            </tr>
-        </thead>
-        <tbody id="table-body">
-
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 <script>
     let apiURl = ""
@@ -65,7 +225,7 @@
                     <td>${aluno.ra}</td>
                 </tr>
             `
-            })
+            }).join('')
             console.log(data);
         }).catch((e) => {
             console.log(e);
@@ -111,7 +271,7 @@
 
         const tableBody = document.getElementById("table-body");
 
-        if(id === '') {
+        if (id === '') {
             atualizarTabela();
             return;
         }
@@ -122,14 +282,14 @@
             console.log(data);
             tableBody.innerHTML = '';
             tableBody.innerHTML =
-            `
+                `
                 <tr>
                     <td>${data.id}</td>
                     <td>${data.nome}</td>
                     <td>${data.ra}</td>
                 </tr>
             `
-            
+
 
         }).catch((e) => {
             console.log(e);
