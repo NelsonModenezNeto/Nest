@@ -27,3 +27,11 @@ Bem-vindo ao **CRUD Learn**, um projeto desenvolvido utilizando **NestJS** para 
    2. Clique duas vezes no arquivo ou arraste-o para uma aba do navegador.
       
 Pronto! Agora você pode interagir com a API por meio do front-end.
+
+## 📝 Estrutura do Projeto
+
+### crud-learn
+Pasta responsável pelo back-end da aplicação, implementado com NestJS.
+
+### consumo-api
+Pasta contendo arquivos HTML e scripts que consomem os endpoints da API.
