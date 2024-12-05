@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        <input id="id" type="text">
+        <input id="name" type="text">
+        <input id="ra" type="text">
+    </form>
+    <button onclick="cadastrarAluno()">Cadastrar</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Ra</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+
+        </tbody>
+    </table>
+</body>
+<script>
+
+    const tableBody = document.getElementById("table-body");
+    let apiURl = ""
+
+    function AtualizarTabela() {
+        console.log("Atualizando tabela");
+
+        apiURl = "http://localhost:3000/aluno/all"
+        fetch(apiURl).then(response => response.json()).then(data => {
+            tableBody.innerHTML = '';
+            tableBody.innerHTML = data.map(aluno => {
+                return `
+                <tr>
+                    <td>${aluno.id}</td>
+                    <td>${aluno.nome}</td>
+                    <td>${aluno.ra}</td>
+                </tr>
+            `
+            })
+            console.log(data);
+        }).catch((e) => {
+            console.log(e);
+        })
+
+    }
+
+    AtualizarTabela();
+
+    function cadastrarAluno() {
+        const id = document.getElementById("id").value;
+        const name = document.getElementById("name").value;
+        const ra = document.getElementById("ra").value;
+
+
+        const body = {
+            id: parseInt(id),
+            nome: name,
+            ra: ra
+        }
+
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }
+
+        apiURl = "http://localhost:3000/aluno"
+        fetch(apiURl, options)
+            .then(() => {
+                AtualizarTabela();
+            }).catch((e) => {
+                console.log(e);
+            })
+
+
+    }
+
+
+
+</script>
+
+</html>
