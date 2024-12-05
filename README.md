@@ -1,6 +1,6 @@
 # Project-Students
 
-Bem-vindo ao **CRUD Learn**, um projeto desenvolvido utilizando **NestJS** para a API e HTML estático para o consumo da API.  
+Bem-vindo ao **Project-Students**, um projeto desenvolvido utilizando **NestJS** para a API e HTML estático para o consumo da API.  
 
 ---
 
