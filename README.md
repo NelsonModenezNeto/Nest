@@ -25,5 +25,5 @@ Bem-vindo ao **CRUD Learn**, um projeto desenvolvido utilizando **NestJS** para 
 2. **Abra o arquivo HTML no navegador de sua preferência:**
    1. Navegue até o arquivo index.html.
    2. Clique duas vezes no arquivo ou arraste-o para uma aba do navegador.
+      
 Pronto! Agora você pode interagir com a API por meio do front-end.
-   nest start
