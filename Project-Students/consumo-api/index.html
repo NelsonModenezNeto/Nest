@@ -9,11 +9,31 @@
 
 <body>
     <form action="">
+        <label for="id">Id</label><br>
         <input id="id" type="text">
+
+        <br><br>
+
+        <label for="name">Nome</label><br>
         <input id="name" type="text">
+
+        <br><br>
+
+        <label for="ra">Ra</label><br>
         <input id="ra" type="text">
+
+        <br><br>
     </form>
     <button onclick="cadastrarAluno()">Cadastrar</button>
+
+    <br><br>
+
+    <div>Filtrar por ID:</div>
+    <input id="filter-id" type="text">
+    <button onclick="filterAlunoById()">Filtrar</button>
+
+    <br><br>
+
     <table>
         <thead>
             <tr>
@@ -28,12 +48,11 @@
     </table>
 </body>
 <script>
-
-    const tableBody = document.getElementById("table-body");
     let apiURl = ""
 
-    function AtualizarTabela() {
+    function atualizarTabela() {
         console.log("Atualizando tabela");
+        const tableBody = document.getElementById("table-body");
 
         apiURl = "http://localhost:3000/aluno/all"
         fetch(apiURl).then(response => response.json()).then(data => {
@@ -54,7 +73,7 @@
 
     }
 
-    AtualizarTabela();
+    atualizarTabela();
 
     function cadastrarAluno() {
         const id = document.getElementById("id").value;
@@ -80,12 +99,41 @@
         apiURl = "http://localhost:3000/aluno"
         fetch(apiURl, options)
             .then(() => {
-                AtualizarTabela();
+                atualizarTabela();
             }).catch((e) => {
                 console.log(e);
             })
+    }
 
+    function filterAlunoById() {
+        const id = document.getElementById("filter-id").value.trim();;
+        api = `http://localhost:3000/aluno/id/${id}`;
 
+        const tableBody = document.getElementById("table-body");
+
+        if(id === '') {
+            atualizarTabela();
+            return;
+        }
+
+        fetch(api).then(response =>
+            response.json()
+        ).then(data => {
+            console.log(data);
+            tableBody.innerHTML = '';
+            tableBody.innerHTML =
+            `
+                <tr>
+                    <td>${data.id}</td>
+                    <td>${data.nome}</td>
+                    <td>${data.ra}</td>
+                </tr>
+            `
+            
+
+        }).catch((e) => {
+            console.log(e);
+        })
     }
 
 
